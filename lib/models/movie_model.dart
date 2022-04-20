@@ -1,15 +1,5 @@
-// To parse this JSON data, do
-//
-//     final movie = movieFromJson(jsonString);
-
 import 'package:meta/meta.dart';
 import 'dart:convert';
-
-List<Movie> movieFromJson(String str) =>
-    List<Movie>.from(json.decode(str).map((x) => Movie.fromJson(x)));
-
-String movieToJson(List<Movie> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Movie {
   Movie({
@@ -41,18 +31,6 @@ class Movie {
             : List<String>.from(json["imageurl"].map((x) => x)),
         synopsis: json["synopsis"] == null ? null : json["synopsis"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "imdbid": imdbid,
-        "genre": List<dynamic>.from(genre.map((x) => x)),
-        "released": released,
-        "title": title,
-        "type": typeValues.reverse[type],
-        "imageurl": imageurl == null
-            ? null
-            : List<dynamic>.from(imageurl!.map((x) => x)),
-        "synopsis": synopsis == null ? null : synopsis,
-      };
 }
 
 enum Type { TV_SERIES, MOVIE, TV_MINI_SERIES, TV_MOVIE }
