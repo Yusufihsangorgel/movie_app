@@ -15,11 +15,11 @@ class AdvancedMovieService {
     var response = await client.get(
         Uri.parse('https://ott-details.p.rapidapi.com/advancedsearch')
             .replace(queryParameters: <String, String>{
-          "start_year": '${_movieController.startYear.value}',
-          "end_year": '${_movieController.endYear.value}',
-          "min_imdb": '${_movieController.minImdbRating.value}',
-          "max_imdb": '${_movieController.maxImdbRating.value}',
-          "genre": '${_movieController.genre.value}',
+          "start_year": _movieController.startYear.value,
+          "end_year": _movieController.endYear.value,
+          "min_imdb": _movieController.minImdbRating.value,
+          "max_imdb": _movieController.maxImdbRating.value,
+          "genre": _movieController.genre.value,
           "language": 'english',
           "type": 'movie',
           "page": '1'

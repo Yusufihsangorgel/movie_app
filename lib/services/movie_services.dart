@@ -13,12 +13,11 @@ class MovieServices {
   static Future<List<Movie>?> getMovies() async {
     final _movieController = Get.put<MovieController>(MovieController());
     var response = await client.get(
-        Uri.parse(
-                'https://ott-details.p.rapidapi.com/search?title=endgame&page=1')
-            .replace(queryParameters: <String, String>{
-          'title': _movieController.movieName.value,
-          'page': '1'
-        }),
+        Uri.parse('https://ott-details.p.rapidapi.com/advancedsearch').replace(
+            queryParameters: <String, String>{
+              'title': '${_movieController.movieName.value}',
+              'page': '1'
+            }),
         headers: {
           "x-rapidapi-host": "ott-details.p.rapidapi.com",
           "x-rapidapi-key": "9d66e81587msh8110b5db8a31f76p1070e1jsn5a72a0f89eed"
