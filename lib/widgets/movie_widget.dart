@@ -12,8 +12,7 @@ class MovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MovieController movieController = Get.put(MovieController());
-    return movieController.openDetails.value == false
+    return movie.openDetails.value == false
         ? Card(
             elevation: 2,
             child: Padding(
@@ -41,7 +40,7 @@ class MovieWidget extends StatelessWidget {
                           backgroundColor: Colors.white,
                           child: IconButton(
                               onPressed: () {
-                                movieController.openMovie(true);
+                                movie.openDetails.value == true;
                               },
                               icon: Icon(Icons.info)),
                         ),
@@ -114,7 +113,7 @@ class MovieWidget extends StatelessWidget {
                           backgroundColor: Colors.white,
                           child: IconButton(
                               onPressed: () {
-                                movieController.openMovie(false);
+                                movie.openDetails.value == false;
                               },
                               icon: Icon(Icons.exit_to_app)),
                         ),
@@ -156,7 +155,10 @@ class MovieWidget extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text("Genre : ${movie.genre[0]}",
                       style: TextStyle(fontSize: 32, fontFamily: 'avenir')),
-                  Text(movie.synopsis),
+                  Text(
+                    movie.synopsis,
+                    maxLines: null,
+                  ),
                 ],
               ),
             ),

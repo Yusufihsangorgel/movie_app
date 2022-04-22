@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class AdvancedMovie {
   AdvancedMovie({
     required this.imageurl,
@@ -18,6 +20,8 @@ class AdvancedMovie {
   final int released;
   final Type? type;
   final String synopsis;
+
+  var openDetails = false.obs;
 
   factory AdvancedMovie.fromJson(Map<String, dynamic> json) => AdvancedMovie(
         imageurl: List<String>.from(json["imageurl"].map((x) => x)),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_app/controllers/movie_controller.dart';
+import 'package:movie_app/models/advanced_movie.dart';
 import 'package:movie_app/screens/movie_screen.dart';
 
 void main() {

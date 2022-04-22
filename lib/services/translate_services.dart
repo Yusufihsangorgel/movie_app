@@ -24,7 +24,7 @@ class TranslateService {
         headers: {
           'content-type': 'application/json',
           'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com',
-          'X-RapidAPI-Key': '9d66e81587msh8110b5db8a31f76p1070e1jsn5a72a0f89eed'
+          'X-RapidAPI-Key': '8ad5d90d72msh7bf606d6993cb80p1f5a9fjsn1242d0cc7448'
         },
         body: message == ""
             ? '[{"Text":"İstediğiniz dilde yazabilirsiniz , yapay zeka yazdığınız dili algılar ve seçtiğiniz dile çevirir, Hadi Bir şeyler Yazın..!"}]'

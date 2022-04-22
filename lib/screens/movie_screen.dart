@@ -16,41 +16,15 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios,
           color: Colors.black,
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              //  Get.to(SettingsScreen());
-            },
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-              onPressed: () {
-                //   Get.to(PushNotifications());
-              },
-              icon: Icon(
-                Icons.notification_add,
-                color: Colors.black,
-              ))
-        ],
       ),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Row(
               children: [
                 const Expanded(
@@ -72,16 +46,14 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: Obx(() {
               if (movieController.isLoading.isTrue) {
-                return (Center(
+                return (const Center(
                   child: CircularProgressIndicator(),
                 ));
               } else
                 // ignore: curly_braces_in_flow_control_structures
                 return AlignedGridView.count(
                   crossAxisCount: movieController.crossCount.value,
-                  itemCount: movieController.openDetails == false
-                      ? movieController.advancedList.length
-                      : 1,
+                  itemCount: movieController.advancedList.length,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   itemBuilder: (context, index) {
