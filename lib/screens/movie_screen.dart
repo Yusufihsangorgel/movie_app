@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.all(16),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Text(
                     'Yusuf Movies',
                     style: TextStyle(
@@ -63,7 +63,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                    icon: Icon(Icons.view_list_rounded), onPressed: () {}),
+                    icon: const Icon(Icons.view_list_rounded),
+                    onPressed: () {}),
                 IconButton(icon: Icon(Icons.grid_view), onPressed: () {}),
               ],
             ),
@@ -77,87 +78,15 @@ class HomeScreen extends StatelessWidget {
               } else
                 // ignore: curly_braces_in_flow_control_structures
                 return AlignedGridView.count(
-                  crossAxisCount: 2,
-                  itemCount: movieController.advancedList.length,
+                  crossAxisCount: movieController.crossCount.value,
+                  itemCount: movieController.openDetails == false
+                      ? movieController.advancedList.length
+                      : 1,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   itemBuilder: (context, index) {
                     return MovieWidget(movieController.advancedList[index]);
-                    //     Card(
-                    //   elevation: 2,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //     child: Column(
-                    //       crossAxisAlignment: CrossAxisAlignment.start,
-                    //       children: [
-                    //         Stack(
-                    //           children: [
-                    //             Container(
-                    //               height: 180,
-                    //               width: double.infinity,
-                    //               clipBehavior: Clip.antiAlias,
-                    //               decoration: BoxDecoration(
-                    //                 borderRadius: BorderRadius.circular(4),
-                    //               ),
-                    //               child: Image.network(
-                    //                 movieController
-                    //                     .advancedList[index].imageurl[0],
-                    //                 fit: BoxFit.cover,
-                    //               ),
-                    //             ),
-                    //             Positioned(
-                    //               right: 0,
-                    //               child: const CircleAvatar(
-                    //                 backgroundColor: Colors.white,
-                    //               ),
-                    //             )
-                    //           ],
-                    //         ),
-                    //         SizedBox(height: 8),
-                    //         Text(
-                    //           movieController.advancedList[index].title,
-                    //           maxLines: 2,
-                    //           style: TextStyle(
-                    //               fontFamily: 'avenir',
-                    //               fontWeight: FontWeight.w800),
-                    //           overflow: TextOverflow.ellipsis,
-                    //         ),
-                    //         SizedBox(height: 8),
-                    //         if (movieController.advancedList[index].imdbid !=
-                    //             null)
-                    //           Container(
-                    //             decoration: BoxDecoration(
-                    //               color: Colors.green,
-                    //               borderRadius: BorderRadius.circular(12),
-                    //             ),
-                    //             padding: const EdgeInsets.symmetric(
-                    //                 horizontal: 4, vertical: 2),
-                    //             child: Row(
-                    //               mainAxisSize: MainAxisSize.min,
-                    //               children: [
-                    //                 Text(
-                    //                   movieController
-                    //                       .advancedList[index].imdbid,
-                    //                   style: TextStyle(color: Colors.white),
-                    //                 ),
-                    //                 Icon(
-                    //                   Icons.star,
-                    //                   size: 16,
-                    //                   color: Colors.white,
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         SizedBox(height: 8),
-                    //         Text(movieController.advancedList[index].genre[0],
-                    //             style: TextStyle(
-                    //                 fontSize: 32, fontFamily: 'avenir')),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // );
                   },
-                  //  Tile(index) => StaggeredTile.fit(1),
                 );
             }),
           )

@@ -16,6 +16,8 @@ class MovieController extends GetxController {
   var minImdbRating = '0'.obs;
   var maxImdbRating = '10'.obs;
   var genre = 'action'.obs;
+  var openDetails = false.obs;
+  var crossCount = 2.obs;
   //------------------------------------
   var movieLanguage = 'english'.obs;
   @override
@@ -23,6 +25,18 @@ class MovieController extends GetxController {
     // fetchMovies();
     fetchAdvancedMovies();
     super.onInit();
+  }
+
+  void openMovie(bool value) {
+    print("girdi kanka : " + value.toString());
+
+    openDetails.value = value;
+
+    if (openDetails.value == false) {
+      crossCount.value = 2;
+    } else {
+      crossCount.value = 1;
+    }
   }
 
   void fetchMovies() async {

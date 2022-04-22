@@ -8,6 +8,15 @@ class MovieDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(movie.title),
+      ),
+      body: Column(
+        children: [
+          Image.network(movie.imageurl[0]),
+        ],
+      ),
+    );
   }
 }
