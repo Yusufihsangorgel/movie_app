@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_app/dashboard/dashboard_binding.dart';
 import 'package:movie_app/screens/movie_screen.dart';
 
 void main() {
@@ -13,7 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      initialRoute: "/",
+      getPages: [
+        GetPage(
+            name: '/', page: () => HomeScreen(), binding: DashBoardBindings()),
+      ],
     );
   }
 }
