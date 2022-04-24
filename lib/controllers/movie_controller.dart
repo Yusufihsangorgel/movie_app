@@ -8,6 +8,9 @@ class MovieController extends GetxController {
   var movieList = <Movie>[].obs;
   var movieName = 'avengers'.obs;
   var isLoading = false.obs;
+  var isError = false.obs;
+  var openDetails = false.obs;
+  var selectedIndex = 0.obs; // index of selected movie
 
   // ----------------------------------
   var advancedList = <AdvancedMovie>[].obs;
@@ -27,17 +30,17 @@ class MovieController extends GetxController {
     super.onInit();
   }
 
-  // void openMovie(bool value) {
-  //   print("girdi kanka : " + value.toString());
+  void openMovie(bool value) {
+    print("girdi kanka : " + value.toString());
 
-  //   openDetails.value = value;
+    openDetails.value = value;
 
-  //   if (openDetails.value == false) {
-  //     crossCount.value = 2;
-  //   } else {
-  //     crossCount.value = 1;
-  //   }
-  // }
+    if (openDetails.value == false) {
+      crossCount.value = 2;
+    } else {
+      crossCount.value = 1;
+    }
+  }
 
   void fetchMovies() async {
     isLoading(true);
@@ -48,6 +51,7 @@ class MovieController extends GetxController {
         isLoading(false);
       }
     } on Exception catch (e) {
+      isError.value = true;
       print(e);
     }
   }

@@ -12,7 +12,8 @@ class MovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return movie.openDetails.value == false
+    final MovieController movieController = Get.put(MovieController());
+    return movieController.openDetails.value == false
         ? Card(
             elevation: 2,
             child: Padding(
@@ -40,7 +41,7 @@ class MovieWidget extends StatelessWidget {
                           backgroundColor: Colors.white,
                           child: IconButton(
                               onPressed: () {
-                                movie.openDetails.value == true;
+                                movieController.openMovie(true);
                               },
                               icon: Icon(Icons.info)),
                         ),
@@ -113,9 +114,9 @@ class MovieWidget extends StatelessWidget {
                           backgroundColor: Colors.white,
                           child: IconButton(
                               onPressed: () {
-                                movie.openDetails.value == false;
+                                movieController.openMovie(false);
                               },
-                              icon: Icon(Icons.exit_to_app)),
+                              icon: const Icon(Icons.exit_to_app)),
                         ),
                       )
                     ],
@@ -142,7 +143,7 @@ class MovieWidget extends StatelessWidget {
                         children: [
                           Text(
                             "IMDB : ${movie.imdbrating.toString()}",
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           const Icon(
                             Icons.star,
@@ -154,7 +155,8 @@ class MovieWidget extends StatelessWidget {
                     ),
                   const SizedBox(height: 8),
                   Text("Genre : ${movie.genre[0]}",
-                      style: TextStyle(fontSize: 32, fontFamily: 'avenir')),
+                      style:
+                          const TextStyle(fontSize: 32, fontFamily: 'avenir')),
                   Text(
                     movie.synopsis,
                     maxLines: null,

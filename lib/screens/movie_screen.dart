@@ -45,7 +45,11 @@ class HomeScreen extends StatelessWidget {
           ),
           Expanded(
             child: Obx(() {
-              if (movieController.isLoading.isTrue) {
+              if (movieController.isError.isTrue) {
+                return const Center(
+                  child: Text("Not Connection"),
+                );
+              } else if (movieController.isLoading.isTrue) {
                 return (const Center(
                   child: CircularProgressIndicator(),
                 ));
@@ -53,11 +57,21 @@ class HomeScreen extends StatelessWidget {
                 // ignore: curly_braces_in_flow_control_structures
                 return AlignedGridView.count(
                   crossAxisCount: movieController.crossCount.value,
-                  itemCount: movieController.advancedList.length,
+                  itemCount: movieController.openDetails == false
+                      ? movieController.advancedList.length
+                      : 1,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   itemBuilder: (context, index) {
-                    return MovieWidget(movieController.advancedList[index]);
+                    return GestureDetector(
+                        onTap: () {
+                          movieController.selectedIndex.value = index;
+                          movieController.openMovie(true);
+                        },
+                        child: movieController.openDetails == false
+                            ? MovieWidget(movieController.advancedList[index])
+                            : MovieWidget(movieController.advancedList[
+                                movieController.selectedIndex.value]));
                   },
                 );
             }),
