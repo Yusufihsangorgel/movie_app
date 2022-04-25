@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/controllers/movie_controller.dart';
 import 'package:movie_app/models/advanced_movie.dart';
-import 'package:movie_app/models/movie_model.dart';
 
 class MovieWidget extends StatelessWidget {
   final AdvancedMovie movie;
@@ -35,17 +34,6 @@ class MovieWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Positioned(
-                        right: 0,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                              onPressed: () {
-                                movieController.openMovie(true);
-                              },
-                              icon: Icon(Icons.info)),
-                        ),
-                      )
                     ],
                   ),
                   const SizedBox(height: 8),
@@ -88,7 +76,6 @@ class MovieWidget extends StatelessWidget {
             ),
           )
         : Card(
-            elevation: 2,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -108,17 +95,6 @@ class MovieWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Positioned(
-                        right: 0,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                              onPressed: () {
-                                movieController.openMovie(false);
-                              },
-                              icon: const Icon(Icons.exit_to_app)),
-                        ),
-                      )
                     ],
                   ),
                   const SizedBox(height: 8),
