@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/dashboard/dashboard.dart';
 import 'package:movie_app/dashboard/dashboard_binding.dart';
-import 'package:movie_app/screens/movie_screen.dart';
 
 void main() {
   runApp(const MyApp());

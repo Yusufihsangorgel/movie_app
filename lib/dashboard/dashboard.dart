@@ -5,14 +5,10 @@ import 'package:movie_app/dashboard/dashboard_controller.dart';
 import 'package:movie_app/navigation/navigation_bar.dart';
 import 'package:movie_app/screens/name_search_screen.dart';
 import 'package:movie_app/screens/movie_screen.dart';
+import 'package:movie_app/screens/settings_screen.dart';
 
-class MyDashBoard extends StatefulWidget {
-  @override
-  _MyDashBoardState createState() => _MyDashBoardState();
-}
-
-class _MyDashBoardState extends State<MyDashBoard> {
-  int _currentIndex = 0;
+class MyDashBoard extends StatelessWidget {
+  const MyDashBoard({Key? key}) : super(key: key);
 
   final _inactiveColor = Colors.grey;
   @override
@@ -21,32 +17,43 @@ class _MyDashBoardState extends State<MyDashBoard> {
       return Scaffold(
         body: SafeArea(
           child: IndexedStack(
-            index: controller.tabIndex,
-            children: [MovieScreen(), DetailsScreen()],
+            index: controller.tabIndex.value,
+            children: [
+              MovieScreen(),
+              const NameSearchScreen(),
+              const SettingsScreen()
+            ],
           ),
         ),
         bottomNavigationBar: CustomAnimatedBottomBar(
           containerHeight: 70,
           backgroundColor: Colors.white,
-          selectedIndex: controller.tabIndex,
+          selectedIndex: controller.tabIndex.value,
           showElevation: true,
           itemCornerRadius: 24,
           curve: Curves.easeIn,
           onItemSelected: controller.changeTabIndex,
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
-              icon: Icon(Icons.apps),
-              title: Text('Ana Sayfa'),
+              icon: const Icon(Icons.apps),
+              title: const Text('Movies'),
+              activeColor: Colors.red,
+              inactiveColor: _inactiveColor,
+              textAlign: TextAlign.center,
+            ),
+            BottomNavyBarItem(
+              icon: const Icon(Icons.chrome_reader_mode_outlined),
+              title: const Text(
+                'Name Search',
+              ),
               activeColor: Colors.green,
               inactiveColor: _inactiveColor,
               textAlign: TextAlign.center,
             ),
             BottomNavyBarItem(
-              icon: Icon(Icons.chrome_reader_mode_outlined),
-              title: Text(
-                'Oku',
-              ),
-              activeColor: Colors.pink,
+              icon: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              activeColor: Colors.blue,
               inactiveColor: _inactiveColor,
               textAlign: TextAlign.center,
             ),
@@ -57,9 +64,13 @@ class _MyDashBoardState extends State<MyDashBoard> {
   }
 
   Widget getBody() {
-    List<Widget> pages = [MovieScreen(), DetailsScreen()];
+    List<Widget> pages = [
+      MovieScreen(),
+      const NameSearchScreen(),
+      const SettingsScreen()
+    ];
     return IndexedStack(
-      index: _currentIndex,
+      index: 0,
       children: pages,
     );
   }
