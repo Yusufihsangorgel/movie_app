@@ -20,7 +20,7 @@ class AdvancedMovieService {
           "min_imdb": _movieController.minImdbRating.value,
           "max_imdb": _movieController.maxImdbRating.value,
           "genre": _movieController.genre.value,
-          "language": 'english',
+          "language": _movieController.movieLanguage.value,
           "type": 'movie',
           "page": '1'
         }),

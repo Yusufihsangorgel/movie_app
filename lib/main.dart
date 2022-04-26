@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_app/dashboard/dashboard.dart';
 import 'package:movie_app/dashboard/dashboard_binding.dart';
 import 'package:movie_app/screens/movie_screen.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       getPages: [
         GetPage(
-            name: '/', page: () => HomeScreen(), binding: DashBoardBindings()),
+            name: '/', page: () => MyDashBoard(), binding: DashBoardBindings()),
       ],
     );
   }

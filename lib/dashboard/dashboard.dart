@@ -3,7 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import 'package:movie_app/dashboard/dashboard_controller.dart';
 import 'package:movie_app/navigation/navigation_bar.dart';
-import 'package:movie_app/screens/details_screen.dart';
+import 'package:movie_app/screens/name_search_screen.dart';
 import 'package:movie_app/screens/movie_screen.dart';
 
 class MyDashBoard extends StatefulWidget {
@@ -22,7 +22,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
         body: SafeArea(
           child: IndexedStack(
             index: controller.tabIndex,
-            children: [HomeScreen()],
+            children: [MovieScreen(), DetailsScreen()],
           ),
         ),
         bottomNavigationBar: CustomAnimatedBottomBar(
@@ -57,7 +57,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
   }
 
   Widget getBody() {
-    List<Widget> pages = [HomeScreen(), DetailsScreen()];
+    List<Widget> pages = [MovieScreen(), DetailsScreen()];
     return IndexedStack(
       index: _currentIndex,
       children: pages,
