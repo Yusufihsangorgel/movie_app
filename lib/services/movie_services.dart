@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie_app/controllers/name_movie_controller.dart';
 import 'package:movie_app/models/movie_model.dart';
 
 import '../controllers/movie_controller.dart';
@@ -11,11 +12,12 @@ class MovieServices {
   static var client = http.Client();
 
   static Future<List<Movie>?> getMovies() async {
-    final _movieController = Get.put<MovieController>(MovieController());
+    final _nameMovieController =
+        Get.put<NameMovieController>(NameMovieController());
     var response = await client.get(
         Uri.parse('https://ott-details.p.rapidapi.com/advancedsearch').replace(
             queryParameters: <String, String>{
-              'title': '${_movieController.movieName.value}',
+              'title': _nameMovieController.movieName.value,
               'page': '1'
             }),
         headers: {

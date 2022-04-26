@@ -44,14 +44,12 @@ class DetailsDialog extends StatelessWidget {
                           int.parse(movieController.minImdbRating.value)) {
                         Get.snackbar("Error",
                             "min. IMDB Score Max. No Greater Than Your Score",
-                            backgroundColor: Colors.black,
-                            colorText: Colors.white);
+                            backgroundColor: Colors.red);
                       } else if (int.parse(movieController.endYear.value) <
                           int.parse(movieController.startYear.value)) {
                         Get.snackbar("Error",
                             "The start year cannot be greater than the end year",
-                            backgroundColor: Colors.black,
-                            colorText: Colors.white);
+                            backgroundColor: Colors.red);
                       } else {
                         movieController.fetchAdvancedMovies();
                         Get.back();
@@ -159,7 +157,7 @@ class DetailsDialog extends StatelessWidget {
                       ),
                     ),
                     Step(
-                      title: Text('Language'),
+                      title: const Text('Language'),
                       content: DropdownButton<String>(
                         value: movieController.movieLanguage.value,
                         icon: const Icon(Icons.arrow_downward),
@@ -185,24 +183,19 @@ class DetailsDialog extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      if (int.parse(movieController.maxImdbRating.value) <
-                          int.parse(movieController.minImdbRating.value)) {
-                        Get.snackbar("Error",
-                            "min. IMDB Score Max. No Greater Than Your Score",
-                            backgroundColor: Colors.black,
-                            colorText: Colors.white);
-                      } else if (int.parse(movieController.endYear.value) <
-                          int.parse(movieController.startYear.value)) {
-                        Get.snackbar("Error",
-                            "The start year cannot be greater than the end year",
-                            backgroundColor: Colors.black,
-                            colorText: Colors.white);
+                      if (movieController.stepperIndex.value < 2) {
+                        Get.snackbar(
+                            "Error", "You have not selected the required steps",
+                            backgroundColor: Colors.red);
                       } else {
+                        Get.snackbar("Succesfull!", "Well Done..!",
+                            backgroundColor: Colors.black,
+                            colorText: Colors.white);
                         movieController.fetchAdvancedMovies();
                         Get.back();
                       }
                     },
-                    child: const Text('End')),
+                    child: const Text('Exit')),
               ],
             )),
       ),

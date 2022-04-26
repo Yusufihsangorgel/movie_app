@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_app/controllers/movie_controller.dart';
 import 'package:movie_app/models/advanced_movie.dart';
 
 class DetailsWidget extends StatelessWidget {
@@ -8,6 +9,7 @@ class DetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MovieController movieController = Get.put(MovieController());
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -27,20 +29,51 @@ class DetailsWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              Positioned(
-                right: 0,
-                child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: IconButton(
-                      color: Colors.grey,
-                      icon: const Icon(Icons.favorite_rounded),
-                      onPressed: () {
-                        Get.snackbar("Başarılı", "Film Favorilere Eklendi!",
-                            backgroundColor: Colors.black,
-                            colorText: Colors.white);
-                      },
-                    )),
-              )
+              Obx(() => Positioned(
+                    right: 0,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: IconButton(
+                        color: Colors.grey,
+                        icon: movieController.isFavorite.isFalse
+                            ? const Icon(Icons.favorite_rounded)
+                            : const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              ),
+                        onPressed: () {
+                          // Timer ekleyip 2 saniyedeki tıklanma sayısını hesapla ve error verdirt.
+                          if (movieController.isFavorite.value == true) {
+                            movieController.isFavorite.value = false;
+                            Get.snackbar("Başarılı",
+                                "Filmi Favorilerinden Çıkardınız..!",
+                                snackPosition: SnackPosition.TOP,
+                                backgroundColor: Colors.black,
+                                colorText: Colors.white,
+                                borderRadius: 10,
+                                margin: const EdgeInsets.all(10),
+                                icon: const Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.red,
+                                ));
+                          } else {
+                            movieController.isFavorite.value = true;
+                            Get.snackbar(
+                                "Başarılı", "Filmi Favorilere Eklediniz..!",
+                                snackPosition: SnackPosition.TOP,
+                                backgroundColor: Colors.black,
+                                colorText: Colors.white,
+                                borderRadius: 10,
+                                margin: const EdgeInsets.all(10),
+                                icon: const Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.red,
+                                ));
+                          }
+                        },
+                      ),
+                    ),
+                  )),
             ],
           ),
           const SizedBox(height: 8),

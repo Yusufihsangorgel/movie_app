@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       getPages: [
         GetPage(
-            name: '/', page: () => MyDashBoard(), binding: DashBoardBindings()),
+            name: '/',
+            page: () => const MyDashBoard(),
+            binding: DashBoardBindings()),
       ],
     );
   }

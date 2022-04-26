@@ -1,18 +1,15 @@
 import 'package:get/get.dart';
 import 'package:movie_app/models/advanced_movie.dart';
-import 'package:movie_app/models/movie_model.dart';
 import 'package:movie_app/services/advanced_service.dart';
-import 'package:movie_app/services/movie_services.dart';
 
 class MovieController extends GetxController {
-  var movieList = <Movie>[].obs;
-  var movieName = 'avengers'.obs;
   var isLoading = false.obs;
   var isError = false.obs;
   var openDetails = false.obs;
   var selectedIndex = 0.obs; // index of selected movie
   var drowdownStartYear = '2005'.obs;
   var dropdownEndYear = '2019'.obs;
+  var isFavorite = false.obs;
   var stepperIndex = 0.obs;
   var yearList = <String>[].obs;
   var genreList = <String>[
@@ -81,7 +78,6 @@ class MovieController extends GetxController {
   void onInit() {
     addYear();
     addImdb();
-    // fetchMovies();
     // fetchAdvancedMovies();
     super.onInit();
   }
@@ -95,20 +91,6 @@ class MovieController extends GetxController {
       crossCount.value = 2;
     } else {
       crossCount.value = 1;
-    }
-  }
-
-  void fetchMovies() async {
-    isLoading(true);
-    try {
-      var movies = await MovieServices.getMovies();
-      if (movies != null) {
-        movieList.value = movies;
-        isLoading(false);
-      }
-    } on Exception catch (e) {
-      isError.value = true;
-      print(e);
     }
   }
 
