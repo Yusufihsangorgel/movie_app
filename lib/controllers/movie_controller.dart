@@ -9,7 +9,7 @@ class MovieController extends GetxController {
   var selectedIndex = 0.obs; // index of selected movie
   var drowdownStartYear = '2005'.obs;
   var dropdownEndYear = '2019'.obs;
-  var isFavorite = false.obs;
+
   var stepperIndex = 0.obs;
   var yearList = <String>[].obs;
   var genreList = <String>[
@@ -74,13 +74,30 @@ class MovieController extends GetxController {
   var movieLanguage = 'English'.obs;
   var crossCount = 2.obs;
   //------------------------------------
+  // favorite
+  var openFavoriteDetails = false.obs;
+  var favoriteCrossCount = 2.obs;
 
   @override
   void onInit() {
     addYear();
     addImdb();
-    fetchAdvancedMovies();
+    //fetchAdvancedMovies();
     super.onInit();
+  }
+
+  void openFavorite(bool value) {
+    print("girdi kanka : " + value.toString());
+
+    openFavoriteDetails.value = value;
+
+    if (openFavoriteDetails.value == false) {
+      favoriteCrossCount.value = 2;
+      print(favoriteCrossCount.value);
+    } else {
+      favoriteCrossCount.value = 1;
+      print(favoriteCrossCount.value);
+    }
   }
 
   void openMovie(bool value) {
@@ -96,7 +113,11 @@ class MovieController extends GetxController {
   }
 
   void removeMovie(int index) {
-    advancedList.removeAt(index);
+    favoriteAdvancedList.removeAt(index);
+    print("sildin la knk " +
+        index.toString() +
+        "lenght la : " +
+        favoriteAdvancedList.length.toString());
   }
 
   void addFavoriteMovie(int index) {

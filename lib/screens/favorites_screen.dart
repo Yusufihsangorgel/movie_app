@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/controllers/movie_controller.dart';
-import 'package:movie_app/widgets/dialog_widget.dart';
+import 'package:movie_app/widgets/details_widget.dart';
 import 'package:movie_app/widgets/movie_widget.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -16,7 +14,7 @@ class FavoritesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Yusuf Movies',
+          'Favorite Movies',
           style: TextStyle(
               fontFamily: 'avenir',
               fontSize: 25,
@@ -25,26 +23,14 @@ class FavoritesScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          IconButton(
-              color: Colors.black,
-              icon: const Icon(Icons.view_list_rounded),
-              onPressed: () {
-                Get.dialog(DetailsDialog(movieController: movieController));
-              }),
-          IconButton(
-              color: Colors.black,
-              icon: const Icon(Icons.favorite),
-              onPressed: () {
-                Get.to(const FavoritesScreen());
-              }),
-        ],
         leading: IconButton(
           onPressed: () {
             if (movieController.openDetails.value == true) {
-              movieController.openMovie(false);
+              movieController.openFavorite(false);
+              Get.back();
             } else {
-              exit(0);
+              movieController.openFavorite(false);
+              Get.back();
             }
           },
           icon: const Icon(Icons.arrow_back_ios),
@@ -65,19 +51,35 @@ class FavoritesScreen extends StatelessWidget {
                 ));
               } else
                 // ignore: curly_braces_in_flow_control_structures
-                return AlignedGridView.count(
-                  crossAxisCount: movieController.crossCount.value,
-                  itemCount: movieController.favoriteAdvancedList.length,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  itemBuilder: (context, index) {
-                    return MovieWidget(
-                        movieController.favoriteAdvancedList[index]);
-
-                    // movieController.advancedList[
-                    //movieController.selectedIndex.value]
-                  },
-                );
+                return movieController.favoriteAdvancedList.length < 0
+                    ? AlignedGridView.count(
+                        crossAxisCount:
+                            movieController.favoriteCrossCount.value,
+                        itemCount: movieController.openFavoriteDetails.isFalse
+                            ? movieController.favoriteAdvancedList.length
+                            : 1,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              onTap: () {
+                                movieController.selectedIndex.value = index;
+                                movieController.openFavorite(true);
+                              },
+                              child: movieController.openFavoriteDetails.isFalse
+                                  ? MovieWidget(movieController
+                                      .favoriteAdvancedList[index])
+                                  : DetailsWidget(
+                                      movie: movieController
+                                              .favoriteAdvancedList[
+                                          movieController.selectedIndex.value],
+                                      index:
+                                          movieController.selectedIndex.value));
+                        },
+                      )
+                    : const Center(
+                        child: Text("No Favorites"),
+                      );
             }),
           )
         ],

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -45,7 +44,7 @@ class MovieScreen extends StatelessWidget {
             if (movieController.openDetails.value == true) {
               movieController.openMovie(false);
             } else {
-              exit(0);
+              //exit(0);
             }
           },
           icon: const Icon(Icons.arrow_back_ios),

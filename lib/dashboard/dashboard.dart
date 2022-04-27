@@ -35,16 +35,16 @@ class MyDashBoard extends StatelessWidget {
           onItemSelected: controller.changeTabIndex,
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
-              icon: const Icon(Icons.apps),
+              icon: const Icon(Icons.movie),
               title: const Text('Movies'),
               activeColor: Colors.red,
               inactiveColor: _inactiveColor,
               textAlign: TextAlign.center,
             ),
             BottomNavyBarItem(
-              icon: const Icon(Icons.chrome_reader_mode_outlined),
+              icon: const Icon(Icons.search),
               title: const Text(
-                'Name Search',
+                'Search',
               ),
               activeColor: Colors.green,
               inactiveColor: _inactiveColor,

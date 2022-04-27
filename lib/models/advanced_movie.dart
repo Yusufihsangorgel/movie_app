@@ -21,6 +21,8 @@ class AdvancedMovie {
   final Type? type;
   final String synopsis;
 
+  var isFavorite = false.obs;
+
   factory AdvancedMovie.fromJson(Map<String, dynamic> json) => AdvancedMovie(
         imageurl: List<String>.from(json["imageurl"].map((x) => x)),
         genre: List<String>.from(json["genre"].map((x) => x)),

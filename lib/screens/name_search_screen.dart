@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:get/get.dart';
+import 'package:movie_app/controllers/name_movie_controller.dart';
 
 class NameSearchScreen extends StatelessWidget {
   const NameSearchScreen({Key? key}) : super(key: key);
@@ -7,16 +9,15 @@ class NameSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController textController = TextEditingController();
-    return Padding(
-      padding: const EdgeInsets.only(top: 58.0, right: 10, left: 10),
-
-      /// In AnimSearchBar widget, the width, textController, onSuffixTap are required properties.
-      /// You have also control over the suffixIcon, prefixIcon, helpText and animationDurationInMilli
-      child: AnimSearchBar(
-        width: 400,
-        textController: textController,
-        onSuffixTap: () {},
-      ),
+    final NameMovieController nameMovieController =
+        Get.put(NameMovieController());
+    return AnimSearchBar(
+      width: 400,
+      textController: textController,
+      suffixIcon: Icon(Icons.search),
+      onSuffixTap: () {
+        print(textController.text);
+      },
     );
   }
 }
