@@ -3,9 +3,9 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import 'package:movie_app/dashboard/dashboard_controller.dart';
 import 'package:movie_app/navigation/navigation_bar.dart';
+import 'package:movie_app/screens/favorites_screen.dart';
 import 'package:movie_app/screens/name_search_screen.dart';
 import 'package:movie_app/screens/movie_screen.dart';
-import 'package:movie_app/screens/settings_screen.dart';
 
 class MyDashBoard extends StatelessWidget {
   const MyDashBoard({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class MyDashBoard extends StatelessWidget {
             children: [
               MovieScreen(),
               const NameSearchScreen(),
-              const SettingsScreen()
+              const FavoritesScreen()
             ],
           ),
         ),
@@ -51,7 +51,7 @@ class MyDashBoard extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             BottomNavyBarItem(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.favorite),
               title: const Text('Settings'),
               activeColor: Colors.blue,
               inactiveColor: _inactiveColor,
@@ -67,7 +67,7 @@ class MyDashBoard extends StatelessWidget {
     List<Widget> pages = [
       MovieScreen(),
       const NameSearchScreen(),
-      const SettingsScreen()
+      const FavoritesScreen()
     ];
     return IndexedStack(
       index: 0,

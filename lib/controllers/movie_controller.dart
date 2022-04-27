@@ -82,8 +82,9 @@ class MovieController extends GetxController {
   void onInit() {
     addYear();
     addImdb();
-    //fetchAdvancedMovies();
+
     super.onInit();
+    fetchAdvancedMovies();
   }
 
   void openFavorite(bool value) {

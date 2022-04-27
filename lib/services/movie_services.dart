@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:movie_app/controllers/name_movie_controller.dart';
 import 'package:movie_app/models/movie_model.dart';
 
-import '../controllers/movie_controller.dart';
-
 class MovieServices {
   static var client = http.Client();
 
@@ -15,14 +13,14 @@ class MovieServices {
     final _nameMovieController =
         Get.put<NameMovieController>(NameMovieController());
     var response = await client.get(
-        Uri.parse('https://ott-details.p.rapidapi.com/advancedsearch').replace(
-            queryParameters: <String, String>{
-              'title': _nameMovieController.movieName.value,
-              'page': '1'
-            }),
+        Uri.parse('https://ott-details.p.rapidapi.com/search')
+            .replace(queryParameters: <String, String>{
+          'title': _nameMovieController.movieName.value,
+          'page': _nameMovieController.page.value.toString()
+        }),
         headers: {
           "x-rapidapi-host": "ott-details.p.rapidapi.com",
-          "x-rapidapi-key": "8ad5d90d72msh7bf606d6993cb80p1f5a9fjsn1242d0cc7448"
+          "x-rapidapi-key": "a3dc0ee653msh4ae73dee2872b95p158369jsn0d76df802204"
         });
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);

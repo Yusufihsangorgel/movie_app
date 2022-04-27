@@ -25,10 +25,15 @@ class SearchWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Image.network(
-                    movie.imageurl![0],
-                    fit: BoxFit.cover,
-                  ),
+                  child: movie.imageurl == null
+                      ? Image.network(
+                          "https://yt3.ggpht.com/TEAdMZfKzX66swz8s-tDk1slRImh9GLdsJltTYmwc-25cYV-c_8eYN5K1jpywF2q9Dy_HKGR=s900-c-k-c0x00ffffff-no-rj",
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          movie.imageurl![0],
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ],
             ),
@@ -41,35 +46,29 @@ class SearchWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 8),
-            if (movie.imdbid != null)
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      movie.released.toString(),
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      movie.type.toString(),
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const Icon(
-                      Icons.star,
-                      size: 16,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(12),
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    movie.released.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  // Text(
+                  //   movie.type.toString(),
+                  //   style: const TextStyle(color: Colors.white),
+                  // ),
+                ],
+              ),
+            ),
             const SizedBox(height: 8),
             Text(movie.genre[0],
-                style: const TextStyle(fontSize: 32, fontFamily: 'avenir')),
+                style: const TextStyle(fontSize: 20, fontFamily: 'avenir')),
           ],
         ),
       ),

@@ -8,22 +8,13 @@ class NameMovieController extends GetxController {
   var movieName = 'avengers'.obs;
   var isLoading = false.obs;
   var isError = false.obs;
-
-
-
-
-
-
+  var page = 1.obs;
 
   @override
   void onInit() {
-   
-    // fetchMovies();
-
+    //fetchMovies();
     super.onInit();
   }
-
-
 
   void fetchMovies() async {
     isLoading(true);
@@ -38,6 +29,4 @@ class NameMovieController extends GetxController {
       print(e);
     }
   }
-
-
 }

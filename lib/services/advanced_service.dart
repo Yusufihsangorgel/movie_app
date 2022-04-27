@@ -26,7 +26,7 @@ class AdvancedMovieService {
         }),
         headers: {
           "x-rapidapi-host": "ott-details.p.rapidapi.com",
-          "x-rapidapi-key": "8ad5d90d72msh7bf606d6993cb80p1f5a9fjsn1242d0cc7448"
+          "x-rapidapi-key": "a3dc0ee653msh4ae73dee2872b95p158369jsn0d76df802204"
         });
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
