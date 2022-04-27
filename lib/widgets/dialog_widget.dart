@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/controllers/movie_controller.dart';
+import 'package:movie_app/screens/movie_screen.dart';
 
 class DetailsDialog extends StatelessWidget {
   const DetailsDialog({
@@ -192,7 +193,7 @@ class DetailsDialog extends StatelessWidget {
                             backgroundColor: Colors.black,
                             colorText: Colors.white);
                         movieController.fetchAdvancedMovies();
-                        Get.back();
+                        Get.to(MovieScreen());
                       }
                     },
                     child: const Text('Exit')),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/controllers/movie_controller.dart';
+import 'package:movie_app/screens/favorites_screen.dart';
 import 'package:movie_app/widgets/details_widget.dart';
 import 'package:movie_app/widgets/dialog_widget.dart';
 import 'package:movie_app/widgets/movie_widget.dart';
@@ -35,7 +36,9 @@ class MovieScreen extends StatelessWidget {
           IconButton(
               color: Colors.black,
               icon: const Icon(Icons.favorite),
-              onPressed: () {}),
+              onPressed: () {
+                Get.to(const FavoritesScreen());
+              }),
         ],
         leading: IconButton(
           onPressed: () {
@@ -78,8 +81,12 @@ class MovieScreen extends StatelessWidget {
                         },
                         child: movieController.openDetails.isFalse
                             ? MovieWidget(movieController.advancedList[index])
-                            : DetailsWidget(movieController.advancedList[
-                                movieController.selectedIndex.value]));
+                            : DetailsWidget(
+                                movie: movieController.advancedList[
+                                    movieController.selectedIndex.value],
+                                index: movieController.selectedIndex.value));
+                    // movieController.advancedList[
+                    //movieController.selectedIndex.value]
                   },
                 );
             }),

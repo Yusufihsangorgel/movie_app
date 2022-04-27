@@ -4,8 +4,9 @@ import 'package:movie_app/controllers/movie_controller.dart';
 import 'package:movie_app/models/advanced_movie.dart';
 
 class DetailsWidget extends StatelessWidget {
+  final int index;
   final AdvancedMovie movie;
-  const DetailsWidget(this.movie);
+  const DetailsWidget({required this.movie, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -43,33 +44,35 @@ class DetailsWidget extends StatelessWidget {
                               ),
                         onPressed: () {
                           // Timer ekleyip 2 saniyedeki tıklanma sayısını hesapla ve error verdirt.
-                          if (movieController.isFavorite.value == true) {
-                            movieController.isFavorite.value = false;
-                            Get.snackbar("Başarılı",
-                                "Filmi Favorilerinden Çıkardınız..!",
-                                snackPosition: SnackPosition.TOP,
-                                backgroundColor: Colors.black,
-                                colorText: Colors.white,
-                                borderRadius: 10,
-                                margin: const EdgeInsets.all(10),
-                                icon: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.red,
-                                ));
-                          } else {
-                            movieController.isFavorite.value = true;
-                            Get.snackbar(
-                                "Başarılı", "Filmi Favorilere Eklediniz..!",
-                                snackPosition: SnackPosition.TOP,
-                                backgroundColor: Colors.black,
-                                colorText: Colors.white,
-                                borderRadius: 10,
-                                margin: const EdgeInsets.all(10),
-                                icon: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.red,
-                                ));
-                          }
+                          // if (movieController.isFavorite.value == true) {
+                          //   movieController.removeMovie(index);
+                          //   movieController.isFavorite.value = false;
+                          //   Get.snackbar("Başarılı",
+                          //       "Filmi Favorilerinden Çıkardınız..!",
+                          //       snackPosition: SnackPosition.TOP,
+                          //       backgroundColor: Colors.black,
+                          //       colorText: Colors.white,
+                          //       borderRadius: 10,
+                          //       margin: const EdgeInsets.all(10),
+                          //       icon: const Icon(
+                          //         Icons.favorite_border,
+                          //         color: Colors.red,
+                          //       ));
+                          // } else {
+                          movieController.isFavorite.value = true;
+                          movieController.addFavoriteMovie(index);
+                          Get.snackbar(
+                              "Başarılı", "Filmi Favorilere Eklediniz..!",
+                              snackPosition: SnackPosition.TOP,
+                              backgroundColor: Colors.black,
+                              colorText: Colors.white,
+                              borderRadius: 10,
+                              margin: const EdgeInsets.all(10),
+                              icon: const Icon(
+                                Icons.favorite_border,
+                                color: Colors.red,
+                              ));
+                          //}
                         },
                       ),
                     ),

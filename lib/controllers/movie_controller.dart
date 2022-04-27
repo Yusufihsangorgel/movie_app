@@ -65,6 +65,7 @@ class MovieController extends GetxController {
 
   // ----------------------------------
   var advancedList = <AdvancedMovie>[].obs;
+  var favoriteAdvancedList = <AdvancedMovie>[].obs;
   var startYear = '2005'.obs;
   var endYear = '2019'.obs;
   var minImdbRating = '0'.obs;
@@ -78,7 +79,7 @@ class MovieController extends GetxController {
   void onInit() {
     addYear();
     addImdb();
-    // fetchAdvancedMovies();
+    fetchAdvancedMovies();
     super.onInit();
   }
 
@@ -92,6 +93,16 @@ class MovieController extends GetxController {
     } else {
       crossCount.value = 1;
     }
+  }
+
+  void removeMovie(int index) {
+    advancedList.removeAt(index);
+  }
+
+  void addFavoriteMovie(int index) {
+    print("çalıştı kanka" + index.toString());
+    print(favoriteAdvancedList.length.toString() + " wuhuu");
+    favoriteAdvancedList.add(advancedList[index]);
   }
 
   void fetchAdvancedMovies() async {
