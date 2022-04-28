@@ -20,14 +20,14 @@ class MovieServices {
         }),
         headers: {
           "x-rapidapi-host": "ott-details.p.rapidapi.com",
-          "x-rapidapi-key": "a3dc0ee653msh4ae73dee2872b95p158369jsn0d76df802204"
+          "x-rapidapi-key": "Please write your key"
         });
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       final movies = jsonResponse['results'] as List;
       return movies.map((e) => Movie.fromJson(e)).toList();
     } else {
-      debugPrint('error');
+      debugPrint('error brooo!!!');
       return null;
     }
   }

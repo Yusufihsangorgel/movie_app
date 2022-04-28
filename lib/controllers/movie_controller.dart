@@ -84,7 +84,6 @@ class MovieController extends GetxController {
     addImdb();
 
     super.onInit();
-    fetchAdvancedMovies();
   }
 
   void openFavorite(bool value) {
@@ -114,7 +113,7 @@ class MovieController extends GetxController {
   }
 
   void removeMovie(int index) {
-    favoriteAdvancedList.removeAt(index);
+    favoriteAdvancedList.remove(advancedList[index]);
     print("sildin la knk " +
         index.toString() +
         "lenght la : " +

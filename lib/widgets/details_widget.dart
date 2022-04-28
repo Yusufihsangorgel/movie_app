@@ -3,11 +3,16 @@ import 'package:get/get.dart';
 import 'package:movie_app/controllers/movie_controller.dart';
 import 'package:movie_app/models/advanced_movie.dart';
 
-class DetailsWidget extends StatelessWidget {
+class DetailsWidget extends StatefulWidget {
   final int index;
   final AdvancedMovie movie;
   const DetailsWidget({required this.movie, required this.index});
 
+  @override
+  State<DetailsWidget> createState() => _DetailsWidgetState();
+}
+
+class _DetailsWidgetState extends State<DetailsWidget> {
   @override
   Widget build(BuildContext context) {
     final MovieController movieController = Get.put(MovieController());
@@ -26,7 +31,7 @@ class DetailsWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Image.network(
-                  movie.imageurl[0],
+                  widget.movie.imageurl[0],
                   fit: BoxFit.cover,
                 ),
               ),
@@ -36,7 +41,7 @@ class DetailsWidget extends StatelessWidget {
                       backgroundColor: Colors.white,
                       child: IconButton(
                         color: Colors.grey,
-                        icon: movie.isFavorite.isFalse
+                        icon: widget.movie.isFavorite.isFalse
                             ? const Icon(Icons.favorite_rounded)
                             : const Icon(
                                 Icons.favorite,
@@ -44,36 +49,39 @@ class DetailsWidget extends StatelessWidget {
                               ),
                         onPressed: () {
                           // Timer ekleyip 2 saniyedeki tıklanma sayısını hesapla ve error verdirt.
-                          if (movie.isFavorite.value == true) {
-                            movieController.removeMovie(index);
-                            movie.isFavorite.value = false;
-                            Get.snackbar("Başarılı",
-                                "Filmi Favorilerinden Çıkardınız..!",
+                          if (widget.movie.isFavorite.value == true) {
+                            Get.snackbar("Successful",
+                                "You removed the movie from your Favorites..!",
                                 snackPosition: SnackPosition.TOP,
                                 backgroundColor: Colors.black,
                                 colorText: Colors.white,
                                 borderRadius: 10,
                                 margin: const EdgeInsets.all(10),
                                 icon: const Icon(
-                                  Icons.favorite_border,
+                                  Icons.favorite_border_outlined,
                                   color: Colors.red,
                                 ));
-                            Get.back();
-                          } else {
-                            movie.isFavorite.value = true;
-                            movieController.addFavoriteMovie(index);
-                            Get.snackbar(
-                                "Başarılı", "Filmi Favorilere Eklediniz..!",
+                            setState(() {
+                              widget.movie.isFavorite.value = false;
+                              movieController.removeMovie(widget.index);
+                            });
+                          } else if (widget.movie.isFavorite.value == false) {
+                            setState(() {
+                              widget.movie.isFavorite.value = true;
+                              movieController.addFavoriteMovie(widget.index);
+                            });
+
+                            Get.snackbar("Successful",
+                                "You have added the movie to Favorites..!",
                                 snackPosition: SnackPosition.TOP,
                                 backgroundColor: Colors.black,
                                 colorText: Colors.white,
                                 borderRadius: 10,
                                 margin: const EdgeInsets.all(10),
                                 icon: const Icon(
-                                  Icons.favorite_border,
+                                  Icons.favorite,
                                   color: Colors.red,
                                 ));
-                            Get.back();
                           }
                         },
                       ),
@@ -83,14 +91,14 @@ class DetailsWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            movie.title,
+            widget.movie.title,
             maxLines: null,
             style: const TextStyle(
                 fontFamily: 'avenir', fontWeight: FontWeight.w800),
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 8),
-          if (movie.imdbid != null)
+          if (widget.movie.imdbid != null)
             Container(
               decoration: BoxDecoration(
                 color: Colors.green,
@@ -101,7 +109,7 @@ class DetailsWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "IMDB : ${movie.imdbrating.toString()}",
+                    "IMDB : ${widget.movie.imdbrating.toString()}",
                     style: const TextStyle(color: Colors.white),
                   ),
                   const Icon(
@@ -113,10 +121,10 @@ class DetailsWidget extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 8),
-          Text("Genre : ${movie.genre[0]}",
+          Text("Genre : ${widget.movie.genre[0]}",
               style: const TextStyle(fontSize: 32, fontFamily: 'avenir')),
           Text(
-            movie.synopsis,
+            widget.movie.synopsis,
             maxLines: null,
           ),
         ],

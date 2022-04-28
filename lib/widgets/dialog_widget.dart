@@ -184,7 +184,17 @@ class DetailsDialog extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      if (movieController.stepperIndex.value < 2) {
+                      if (int.parse(movieController.maxImdbRating.value) <
+                          int.parse(movieController.minImdbRating.value)) {
+                        Get.snackbar("Error",
+                            "min. IMDB Score Max. No Greater Than Your Score",
+                            backgroundColor: Colors.red);
+                      } else if (int.parse(movieController.endYear.value) <
+                          int.parse(movieController.startYear.value)) {
+                        Get.snackbar("Error",
+                            "The start year cannot be greater than the end year",
+                            backgroundColor: Colors.red);
+                      } else if (movieController.stepperIndex.value < 2) {
                         Get.snackbar(
                             "Error", "You have not selected the required steps",
                             backgroundColor: Colors.red);

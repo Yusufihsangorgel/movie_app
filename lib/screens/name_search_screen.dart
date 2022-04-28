@@ -96,7 +96,7 @@ class NameSearchScreen extends StatelessWidget {
                           ),
                           backgroundColor: Colors.red,
                         );
-                      } else if (nameMovieController.page.value < 5) {
+                      } else if (nameMovieController.page.value < 3) {
                         nameMovieController.page.value += 1;
                         nameMovieController.fetchMovies();
                       } else {

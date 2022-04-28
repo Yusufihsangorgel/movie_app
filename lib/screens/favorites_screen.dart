@@ -51,7 +51,7 @@ class FavoritesScreen extends StatelessWidget {
                 ));
               } else
                 // ignore: curly_braces_in_flow_control_structures
-                return movieController.favoriteAdvancedList.length < 0
+                return movieController.favoriteAdvancedList.length > 0
                     ? AlignedGridView.count(
                         crossAxisCount:
                             movieController.favoriteCrossCount.value,

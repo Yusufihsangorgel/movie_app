@@ -7,9 +7,21 @@ import 'package:movie_app/widgets/details_widget.dart';
 import 'package:movie_app/widgets/dialog_widget.dart';
 import 'package:movie_app/widgets/movie_widget.dart';
 
-class MovieScreen extends StatelessWidget {
+class MovieScreen extends StatefulWidget {
   MovieScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MovieScreen> createState() => _MovieScreenState();
+}
+
+class _MovieScreenState extends State<MovieScreen> {
   final MovieController movieController = Get.put(MovieController());
+
+  @override
+  void initState() {
+    movieController.fetchAdvancedMovies();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +101,6 @@ class MovieScreen extends StatelessWidget {
                                   movie: movieController.advancedList[
                                       movieController.selectedIndex.value],
                                   index: movieController.selectedIndex.value));
-                      // movieController.advancedList[
-                      //movieController.selectedIndex.value]
                     },
                   );
               }),
